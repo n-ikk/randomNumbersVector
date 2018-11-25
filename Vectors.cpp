@@ -14,14 +14,15 @@ double summation(vector<int>&, int);
 vector<int> bubbleSort(vector<int>&, int);
 double calculateMean(double, double);
 double findMedian(vector<int>&, int);
+double calculateVariance(vector<int>&, double, int);
+double calculateStandardDeviation(double);
 
 
 vector<int> randomNumbers;
 
 unsigned seed;
 int number, max, min, maxOccurrence, minOccurrence, averageNumber;
-double sum, length, mean;
-int length2;
+double sum, length, mean, variance;
 int main()
 {
 	seed = time(0);
@@ -60,7 +61,7 @@ int main()
 		cout << number << '\n';
 	
 	}
-	
+	system("PAUSE");
 	sum = summation(randomNumbers, length);
 	mean = calculateMean(sum, length);
 
@@ -72,6 +73,12 @@ int main()
 	}
 	cout << "The mean is: " << mean << '\n';
 	cout << "The median is: " << findMedian(randomNumbers, length) << '\n';
+	
+	variance = calculateVariance(randomNumbers, mean, length);
+	cout << "The variance is: " << variance << '\n';
+	
+	cout << "The standard deviation is: " << calculateStandardDeviation(variance);
+	
 	cout << "The maximum is: " << max << " and its occurrence is: " << maxOccurrence << '\n';
 	cout << "The minimum is: " << min << " and its occurrence is: " << minOccurrence << '\n';
 }
@@ -119,3 +126,22 @@ vector<int> bubbleSort(vector<int>& randomNumbers, int length) {
 	}
 	return randomNumbers;
 }
+
+double calculateVariance(vector<int>& randomNumbers, double mean, int length) {
+	double variance = 0;
+
+
+	for (int i = 0; i < length; i++) {
+		variance = variance + pow((randomNumbers[i] - mean), 2);
+	}
+	variance = variance / length;
+	return variance;
+
+}
+double calculateStandardDeviation(double variance) {
+	double standardDeviation;
+	standardDeviation = sqrt(variance);
+	return standardDeviation;
+}
+
+
